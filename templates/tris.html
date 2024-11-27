@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intelligence Risk Scoring</title>
+    <style>
+        /* Basic reset for margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50; /* Green color */
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto; /* Center the form */
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px; /* Spacing between inputs */
+        }
+
+        button {
+            width: 80%;
+            padding: 10px;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .error {
+            background-color: #f8d7da; /* Light red background for error messages */
+            color: #721c24; /* Dark red text */
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Threat Intelligence Risk Scoring</h1>
+    <form method="POST">
+        <label for="severity">Severity (0-10):</label>
+        <input type="text" id="severity" name="severity" required>
+
+        <label for="likelihood">Likelihood (0-10):</label>
+        <input type="text" id="likelihood" name="likelihood" required>
+
+        <label for="impact">Impact (0-10):</label>
+        <input type="text" id="impact" name="impact" required>
+
+        <label for="confidence">Confidence Level (0-1):</label>
+        <input type="text" id="confidence" name="confidence" required>
+
+        <button type="submit">Calculate Risk Score</button>
+    </form>
+
+    
+            
+        
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE Details</title>
+    <style>
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function exploreScoringSystem() {
+            window.location.href = "{{ url_for('explore_scoring_system') }}"; // Ensure this route is defined in your Flask app
+        }
+
+        function checkPublicExploit() {
+            window.location.href = "{{ url_for('check_public_exploit') }}"; // Ensure this route is defined in your Flask app
+        }
+    </script>
+</head>
+<body>
+    <h2>CVE Details</h2>
+
+
+    <p>No CVE details found.</p>
+    
+    <p style="color: red;">{{ error }}</p>
+    
+
+    <div class="button-container">
+        <button onclick="exploreScoringSystem()">Explore More Scoring System</button>
+        <button onclick="checkPublicExploit()">Check Public Exploit</button>
+    </div>
+</body>
+</html>

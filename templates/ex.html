@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVE Details Finder</title>
+    <style>
+               body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        input[type="text"] {
+            width: 80%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        h2 {
+            margin-top: 20px;
+            color: #34495e;
+        }
+        textarea {
+            width: 80%;
+            max-width: 600px;
+            height: 300px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            resize: none;
+            font-size: 16px;
+            color: #333;
+            background-color: #ffffff;
+        }
+        textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>CVE Details Finder</h1>
+    <p>Enter CVE ID (format: CVE-YYYY-NNNN):</p>
+    <input type="text" id="cve_id" placeholder="CVE-YYYY-NNNN" />
+    <button id="search_btn">Search CVE</button>
+    <h2>Results:</h2>
+    <textarea id="output" readonly></textarea>
+    <button id="cvss_btn">Check CVSS Score</button>
+    
+    <script>
+        document.getElementById('search_btn').onclick = function() {
+            const cveId = document.getElementById('cve_id').value;
+            document.getElementById('output').value = "Searching for information...";
+            
+            fetch('/search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `cve_id=${encodeURIComponent(cveId)}`
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error);
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('output').value = data.result;
+            })
+            .catch(error => {
+                document.getElementById('output').value = error.message;
+            });
+        };
+        document.getElementById('cvss_btn').onclick = function() {
+            const cveId = document.getElementById('cve_id').value;
+            if (cveId) {
+                
+                window.location.href = `/cvss.html?cve_id=${encodeURIComponent(cveId)}`;
+            } else {
+                alert("Please enter a CVE ID before checking the CVSS score.");
+            }
+        };
+    </script>
+</body>
+</html>
+
+
+
+

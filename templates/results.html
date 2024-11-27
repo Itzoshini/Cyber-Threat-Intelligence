@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Scan Results</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Page URL</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.page_url }}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-version" data-index="{{ loop.index0 }}">
+                                Show Version
+                            </button>
+                            <a href="{{ url_for('details', index=loop.index0) }}" class="btn btn-primary btn-sm">
+                                Go to Details
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.show-version').click(function() {
+        var index = $(this).data('index');
+        $.get('/show_version/' + index, function(data) {
+            if (data.error) {
+                alert('Error: ' + data.error);
+            } else {
+                alert('jQuery Version: ' + data.version + '\nSource: ' + data.jquery_url);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

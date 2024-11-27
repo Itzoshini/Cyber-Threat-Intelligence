@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerabilities for {{ package_name }} - {{ package_version }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vulnerabilities for {{ package_name }} - {{ package_version }}</h1>
+    {% if vulnerabilities %}
+        <ul>
+            {% for vulnerability in vulnerabilities %}
+                <li>
+                    <strong>{{ vulnerability.vuln_title }}</strong> - 
+                    <a href="{{ vulnerability.vuln_link }}">Details</a>
+                    <ul>
+                        <li><strong>CVE IDs:</strong> {{ vulnerability.cve_ids | join(', ') }}</li>
+                        <li><strong>CWE IDs:</strong> 
+                            {% for cwe_id in vulnerability.cwe_ids %}
+                                {{ cwe_id }} (<a href="https://cwe.mitre.org/data/definitions/{{ cwe_id.split('-')[-1] }}.html" target="_blank">Open</a>){% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No vulnerabilities found.</p>
+    {% endif %}
+    <a href="/" class="back-link">Back to Home</a>
+</body>
+</html>

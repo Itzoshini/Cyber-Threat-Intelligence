@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordered Risk Scale Gauge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .gauge-container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .gauge {
+            position: relative;
+            width: 300px;
+            height: 150px; /* Adjusted height for semicircle */
+            margin: 20px auto;
+            overflow: hidden; /* Ensures arcs stay within bounds */
+        }
+
+        .arc {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 150px 150px 0 0; /* Creates a semicircular shape */
+            border: 10px solid transparent;
+            box-sizing: border-box;
+            transform-origin: bottom; /* Sets the pivot point for rotation */
+        }
+
+        /* Arcs arranged in order */
+        .low {
+            background-color: #4caf50; /* Green for Low risk */
+            transform: rotate(135deg); /* Low risk covers first 135 degrees */
+            height: 75px; /* Adjusted to form a semi-circle */
+            z-index: 1; /* Ensure it's below the needle */
+        }
+
+        .medium {
+            background-color: #ffeb3b; /* Yellow for Medium risk */
+            transform: rotate(90deg); /* Medium risk covers the next 45 degrees */
+            height: 75px; /* Adjusted to form a semi-circle */
+            z-index: 1; /* Ensure it's below the needle */
+        }
+
+        .high {
+            background-color: #ff9800; /* Orange for High risk */
+            transform: rotate(45deg); /* High risk covers the next 45 degrees */
+            height: 75px; /* Adjusted to form a semi-circle */
+            z-index: 1; /* Ensure it's below the needle */
+        }
+
+        .critical {
+            background-color: #f44336; /* Red for Critical risk */
+            transform: rotate(0deg); /* Critical risk covers last 45 degrees */
+            height: 75px; /* Adjusted to form a semi-circle */
+            z-index: 1; /* Ensure it's below the needle */
+        }
+
+        .needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform-origin: bottom center;
+            transform: rotate(-90deg);
+            width: 10px;
+            height: 130px; /* Needle height */
+            background-color: #333; /* Dark color for needle */
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+            z-index: 2;
+        }
+
+        .gauge .labels {
+            position: absolute;
+            top: 110px; /* Adjusted position */
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .gauge .labels span {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gauge-container">
+        <h1>RISK SCALE</h1>
+        <label for="cve-id">Enter CVE ID:</label>
+        <input type="text" id="cve-id" placeholder="CVE-2021-44228">
+        <button onclick="checkRisk()">Check Risk</button>
+
+        <!-- The risk gauge -->
+        <div class="gauge">
+            <div class="arc low"></div>
+            <div class="arc medium"></div>
+            <div class="arc high"></div>
+            <div class="arc critical"></div>
+            <div class="needle" id="needle"></div>
+            <div class="labels">
+                <span>Low</span>
+                <span>Medium</span>
+                <span>High</span>
+                <span>Critical</span>
+            </div>
+        </div>
+
+        <!-- Displaying risk level -->
+        <p id="risk-text">Low Risk</p>
+
+        <!-- Error message -->
+        <p id="error-message"></p>
+    </div>
+
+    <script>
+        function setRiskLevel(cvss_score) {
+            const needle = document.getElementById('needle');
+            const riskText = document.getElementById('risk-text');
+            const errorMessage = document.getElementById('error-message');
+            let rotateDeg = -90; // Default to Low risk
+            let riskDescription = "Low Risk";
+
+            if (cvss_score === null) {
+                errorMessage.textContent = "Error fetching risk level.";
+                return;
+            }
+
+            errorMessage.textContent = ''; // Clear any previous error
+
+            if (cvss_score >= 9.0) {
+                rotateDeg = 90;  // Critical Risk rotation
+                riskDescription = "Critical Risk";
+            } else if (cvss_score >= 7.0) {
+                rotateDeg = 45;  // High Risk rotation
+                riskDescription = "High Risk";
+            } else if (cvss_score >= 4.0) {
+                rotateDeg = 0;  // Medium Risk rotation
+                riskDescription = "Medium Risk";
+            } else {
+                rotateDeg = -90; // Low Risk rotation
+                riskDescription = "Low Risk";
+            }
+
+            needle.style.transform = `rotate(${rotateDeg}deg)`;
+            riskText.textContent = riskDescription;
+        }
+
+        function checkRisk() {
+            const cveId = document.getElementById('cve-id').value;
+
+            fetch('/fetch_cvss', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ 'cve_id': cveId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('error-message').textContent = data.error;
+                    setRiskLevel(null);
+                } else {
+                    const cvssScore = data.cvss_score;
+                    setRiskLevel(cvssScore);
+                }
+            })
+            .catch(error => {
+                document.getElementById('error-message').textContent = 'Error fetching data.';
+                setRiskLevel(null);
+            });
+        }
+    </script>
+
+</body>
+</html>

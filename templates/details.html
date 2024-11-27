@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Links and Vulnerabilities</title>
+</head>
+<body>
+    <h1>jQuery Links and Vulnerabilities</h1>
+
+    {% if links %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Link</th>
+                    <th>Version</th>
+                    <th>Vulnerability Status</th>
+                    <th>CVE Score</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in links %}
+                <tr>
+                    <td><a href="{{ item.link }}">{{ item.link }}</a></td>
+                    <td>{{ item.version }}</td>
+                    <td>{{ item.vulnerability }}</td>
+                    <td>{{ item.cve_score }}</td>
+                    <td>{{ item.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No links found.</p>
+    {% endif %}
+    
+    <a href="/">Go Back</a>
+</body>
+</html>

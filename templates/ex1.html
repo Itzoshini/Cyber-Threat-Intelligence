@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploit Results for {{ cve_id }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Exploit Results for {{ cve_id }}</h1>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mb-4">Back</a>
+        
+        {% if exploits and exploits|length > 0 %}
+            <div class="list-group">
+                {% for exploit in exploits %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ exploit.title }}</h5>
+                        <p class="mb-1">Source: <a href="{{ exploit.link }}" target="_blank">{{ exploit.link }}</a></p>
+                        <p>Description: {{ exploit.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="alert alert-info">No public exploits found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+/* Style for the body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Container for the form */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style for the form label */
+label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* Style for the form input */
+input[type="text"] {
+
+    max-width: 700px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style for the submit button */
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 50%;
+    margin-left: 140px;
+    
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Style for the headings */
+h1, h2, h3 {
+    color: #333;
+    text-align: center;
+}
+
+/* Style for the error message */
+p {
+    font-size: 14px;
+}
+
+/* Style for error messages */
+p.error {
+    color: red;
+}
+
+/* Style for vulnerability list */
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 20px;
+}
+
+ul li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+ul li strong {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+ul li ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+ul li ul li {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* Style for hyperlinks */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Set the max-width of the page */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}

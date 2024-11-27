@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring System Info with Dropdown</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light Gray */
+            color: #333; /* Dark Gray */
+        }
+
+        header {
+            background-color: #002147; /* Navy Blue */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative; /* Added for positioning the back arrow */
+        }
+
+        h1 {
+            color: #F1E29D; /* Vanilla */
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        /* Go Back Arrow */
+        .back-arrow {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 1.5em;
+            color: #F1E29D; /* Vanilla */
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .back-arrow:hover {
+            color: #F1E29D; /* Keep hover effect simple */
+        }
+
+        /* Dropdown Container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown button {
+            background-color: #007BFF; /* Electric Blue */
+            color: white;
+            padding: 12px 30px; /* Adjusted padding for better shape */
+            font-size: 1em;
+            border: none;
+            border-radius: 25px; /* Oval button */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+        }
+
+        .dropdown button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-3px);
+        }
+
+        .dropdown button:focus {
+            outline: none;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #F1E29D; /* Vanilla */
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            border-radius: 5px; /* Rounded corners */
+        }
+
+        .dropdown-content a {
+            color: #333; /* Dark Gray for text */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease; /* Smooth hover transition */
+        }
+
+        .dropdown-content a:hover {
+            background-color: #E0DFAE; /* Lighter Vanilla */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        .sticky-button {
+            position: fixed;
+            bottom: 20px; /* Distance from the bottom */
+            right: 20px; /* Distance from the right */
+            background-color: #007BFF; /* Electric Blue */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .sticky-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+            transform: translateY(-3px);
+        }
+
+    </style>
+</head>
+<body><header>
+    <div class="back-arrow" onclick="goBack()">←</div>
+    <h1>Scoring System Information</h1>
+    <div class="nav-buttons">
+        <!-- Vulnerability Information Dropdown -->
+        <div class="dropdown">
+            
+            <button>Vulnerability Information</button>
+            <div class="dropdown-content">
+                <a href="#">DESCRIPTION</a>
+                <a href="#">EXPLOIT MATURITY</a>
+                <a href="#">AFFECTED VERSIONS</a>
+            </div>
+        </div>
+
+        <!-- Weakness and Scoring System Dropdown -->
+        <div class="dropdown">
+            <button>Weakness and Scoring System</button>
+            <div class="dropdown-content">
+                <a href="cwe.html">CWE</a>
+                <a href="cwss.html">CWSS</a>
+            </div>
+        </div>
+
+        <!-- Risk-Based and Predictive Scoring Dropdown -->
+        <div class="dropdown">
+            <button>Risk-Based and Predictive Scoring</button>
+            <div class="dropdown-content">
+                <!-- Redirect to EPSS scoring system page -->
+                <a href="epss.html">EPSS</a>
+                <a href="pvrs.html">PVRSS</a>
+                <a href="rps.html">RPS</a>
+                <a href="vpr.html">VPR</a>
+            </div>
+        </div>
+
+        <!-- Environmental and Threat-Based Scoring Dropdown -->
+        <div class="dropdown">
+            <button>Environmental and Threat-Based Scoring</button>
+            <div class="dropdown-content">
+                <a href="#">EVS</a>
+                <a href="tris.html">Threat Intelligence Risk Scoring</a>
+                
+                
+            </div>
+        </div>
+    </div>
+    <button class="sticky-button" onclick="redirectToExploitPage()">Find Public Exploit!!</button>
+
+</header>
+
+<script>
+    function goBack() {
+        window.history.back(); // Goes back to the previous page
+    }
+
+    function redirectToExploitPage() {
+        window.location.href = 'ex1.html'; // Redirects to ex.html page
+    }
+</script>
+
+</body>
+</html>

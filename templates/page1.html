@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to jQuery Link Extractor</title>
+    <style>
+       body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #ff6f91, #ff9671, #ffc75f, #f9f871);
+    background-size: 200% 200%;
+    animation: pulseGlow 6s infinite ease-in-out;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+@keyframes pulseGlow {
+    0% { background-size: 200% 200%; opacity: 1; }
+    50% { background-size: 100% 100%; opacity: 0.8; }
+    100% { background-size: 200% 200%; opacity: 1; }
+}
+
+
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            color: #333;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.9em;
+            padding: 8px 12px;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #0073e6;
+        }
+        .login-button {
+            padding: 8px 15px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            margin-top: -5px;
+        }
+        .login-button:hover {
+            background-color: #005bb5;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 30px;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        h1 {
+            color: black;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            color: black;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: rgba(91, 44, 111, 0.7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background-color: rgba(71, 24, 94, 0.8);
+        }
+    </style>
+</head>
+<body onload="fadeIn()">
+    <header>
+        <nav class="navbar">
+            <div class="logo">Secure Spot</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how-to-use">How to Use</a></li>
+                <li><a href="#documentation">Documentation</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="login-button">Login</button>
+        </nav>
+    </header>
+
+    <div class="container" id="content">
+        <h1>Welcome to the jQuery Link Extractor</h1>
+        <p>Click below to extract your links and simplify your web scraping tasks.</p>
+        <button id="go-to-extract">Go to Extract Links</button>
+    </div>
+
+    <script>
+        function fadeIn() {
+            document.body.style.opacity = 1;
+            const content = document.getElementById('content');
+            content.style.opacity = 1;
+            content.style.transform = 'translateY(0)';
+        }
+
+        document.getElementById('go-to-extract').onclick = function() {
+            window.location.href = '/index';
+        };
+        
+    </script>
+</body>
+</html>

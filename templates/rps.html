@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPS Calculator</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f0ece3; /* Soft beige background */
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navigation menu bar styling */
+        nav {
+            background-color: #34675c; /* Deep forest green */
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: #d9b44a; /* Goldenrod for contrast */
+            font-size: 20px;
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            color: #d9b44a; /* Goldenrod text for the nav links */
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #88a09e; /* Soft seafoam green for hover */
+        }
+
+        /* Page title styling */
+        h1 {
+            text-align: center;
+            color: #34675c; /* Deep forest green for the title */
+            margin-bottom: 20px;
+            font-size: 24px;
+            padding-top: 20px;
+        }
+
+        /* Form styling */
+        form {
+            background-color: #dfece7; /* Light sage green for form background */
+            color: #405d5b; /* Darker green-gray text */
+            padding: 30px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            margin: 40px auto;
+        }
+
+        label {
+            font-size: 14px;
+            color: #405d5b; /* Darker green-gray for labels */
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #b0bfb8; /* Muted green-gray for input borders */
+            border-radius: 6px;
+            background-color: #e5ede9; /* Very light sage green for input background */
+            color: #405d5b; /* Darker green-gray text */
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #88a09e; /* Soft seafoam green for the button */
+            color: #ffffff; /* White text on the button for contrast */
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #709390; /* Slightly darker seafoam green on hover */
+        }
+
+        form {
+            border: 1px solid #b0bfb8; /* Muted green-gray form border */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <h2>RPS Calculator</h2>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <h1>Remediation Prediction Score Calculator</h1>
+    <form action="/calculate" method="post">
+        <label for="exploitability">Exploitability Score (1-10):</label>
+        <input type="number" name="exploitability" min="1" max="10" required>
+
+        <label for="impact">Impact Score (1-10):</label>
+        <input type="number" name="impact" min="1" max="10" required>
+
+        <label for="fix_availability">Fix Availability Score (1-10):</label>
+        <input type="number" name="fix_availability" min="1" max="10" required>
+
+        <label for="time_to_remediate">Time to Remediate (days):</label>
+        <input type="number" name="time_to_remediate" min="1" required>
+
+        <button type="submit">Calculate RPS</button>
+    </form>
+
+</body>
+</html>

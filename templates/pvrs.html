@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PV-RSS Score Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            
+        }
+        h2{
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+           text-align: center;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>PVRSS Score Calculator</h2>
+    <form action="/calculate" method="post">
+        <label for="cvss_score">Enter CVSS Score (0-10):</label>
+        <input type="text" id="cvss_score" name="cvss_score" required>
+
+        <label for="exploit_available">Is Exploit Available? (Yes/No):</label>
+        <input type="text" id="exploit_available" name="exploit_available" required>
+
+        <label for="severity_level">Severity Level (Low/Medium/High/Critical):</label>
+        <input type="text" id="severity_level" name="severity_level" required>
+
+        <button type="submit">Calculate PVRSS Score</button>
+    </form>
+</body>
+</html>
